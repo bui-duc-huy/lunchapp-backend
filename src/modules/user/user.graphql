@@ -1,0 +1,46 @@
+directive @hasPermission(permission: String) on FIELD | FIELD_DEFINITION
+directive @login on FIELD | FIELD_DEFINITION
+
+enum Roles {
+    ADMIN
+    MEMBER
+    GUEST
+}
+
+type User {
+    _id: String!
+    fullName: String!
+    username: String!
+    password: String!
+    idLocked:  Boolean
+    reason: String!
+    createAt: Int!
+    roles: Roles!
+}
+
+input CreateUserInput {
+	username: String!
+	password: String!
+	fullName: String!
+}
+
+input LoginInput { 
+    username: String!
+    password: String!
+}
+
+type LoginResponse {
+    token: String
+    roles: String
+}
+
+type Query {
+    me: User!
+    users: [User!]
+    user(id: String): User
+}
+
+type Mutation {
+    createUser(input: CreateUserInput): User @hasPermission(permission: "ADMIN")
+    login(input: LoginInput): LoginResponse @login
+}
