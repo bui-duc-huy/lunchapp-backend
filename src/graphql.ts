@@ -7,14 +7,14 @@
 /* tslint:disable */
 export enum Roles {
     ADMIN = "ADMIN",
-    MEMBER = "MEMBER",
-    GUEST = "GUEST"
+    MEMBER = "MEMBER"
 }
 
 export interface CreateUserInput {
     username: string;
     password: string;
-    fullName: string;
+    fullname: string;
+    role: Roles;
 }
 
 export interface LoginInput {
@@ -39,12 +39,12 @@ export interface IQuery {
 }
 
 export interface User {
-    _id: string;
-    fullName: string;
-    username: string;
-    password: string;
+    _id?: string;
+    fullname?: string;
+    username?: string;
+    password?: string;
     idLocked?: boolean;
-    reason: string;
-    createAt: number;
-    roles: Roles;
+    reason?: string;
+    createAt?: number;
+    role?: Roles;
 }

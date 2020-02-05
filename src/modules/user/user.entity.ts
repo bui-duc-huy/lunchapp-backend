@@ -44,6 +44,10 @@ export class CreateUserInput {
 	@IsNotEmpty({ message: 'Your password can not be blank' })
 	password: string
 
+	@IsString()
+	@IsNotEmpty({ message: 'Your password can not be blank' })
+	role: string
+
 }
 
 export class UpdateUserInput {
@@ -64,6 +68,7 @@ export class UpdateUserInput {
 
 @Entity()
 export class UserEntity {
+
     @ObjectIdColumn()
     _id: string
 

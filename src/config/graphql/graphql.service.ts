@@ -8,9 +8,9 @@ export class GraphqlService implements GqlOptionsFactory {
     async createGqlOptions(): Promise<GqlModuleOptions> {
         const directiveResolvers = {
             hasPermission: async (next, source, args, ctx) => {
-                const { permissions } = ctx
+                const { roles } = args
 
-                if (permissions.indexOf(args.permission) === -1) {
+                if (roles.indexOf(ctx.role) === -1) {
                     throw new GraphQLError('you dont have permission')
                 }
 
