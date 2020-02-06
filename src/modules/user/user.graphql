@@ -11,9 +11,9 @@ type User {
     fullname: String
     username: String
     password: String
-    idLocked:  Boolean
+    isLocked:  Boolean
     reason: String
-    createAt: Int
+    createdAt: String
     role: Roles
 }
 
@@ -31,7 +31,7 @@ input LoginInput {
 
 type LoginResponse {
     token: String
-    roles: String
+    role: String
 }
 
 type Query {
@@ -43,4 +43,6 @@ type Query {
 type Mutation {
     createUser(input: CreateUserInput): User @hasPermission(roles: ["ADMIN"])
     login(input: LoginInput): LoginResponse 
+    deleteAllUser: Boolean @hasPermission(roles: ["ADMIN"])
+    changePassword(newPassword: String, idUser: String): User @hasPermission(roles: ["ADMIN"])
 }

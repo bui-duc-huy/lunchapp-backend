@@ -10,7 +10,7 @@ export class GraphqlService implements GqlOptionsFactory {
             hasPermission: async (next, source, args, ctx) => {
                 const { roles } = args
 
-                if (roles.indexOf(ctx.role) === -1) {
+                if (roles.indexOf(ctx.currentUser.role) === -1) {
                     throw new GraphQLError('you dont have permission')
                 }
 
@@ -49,7 +49,7 @@ export class GraphqlService implements GqlOptionsFactory {
                         return dec
                     })
     
-                    return decoded 
+                    return decoded
                 }
             }
         }

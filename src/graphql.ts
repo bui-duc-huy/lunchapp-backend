@@ -24,12 +24,14 @@ export interface LoginInput {
 
 export interface LoginResponse {
     token?: string;
-    roles?: string;
+    role?: string;
 }
 
 export interface IMutation {
     createUser(input?: CreateUserInput): User | Promise<User>;
     login(input?: LoginInput): LoginResponse | Promise<LoginResponse>;
+    deleteAllUser(): boolean | Promise<boolean>;
+    changePassword(newPassword?: string, idUser?: string): User | Promise<User>;
 }
 
 export interface IQuery {
@@ -43,8 +45,8 @@ export interface User {
     fullname?: string;
     username?: string;
     password?: string;
-    idLocked?: boolean;
+    isLocked?: boolean;
     reason?: string;
-    createAt?: number;
+    createdAt?: string;
     role?: Roles;
 }

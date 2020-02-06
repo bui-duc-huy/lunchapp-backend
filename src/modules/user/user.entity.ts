@@ -58,15 +58,22 @@ export class UpdateUserInput {
 	@IsNotEmpty({ message: 'Your password can not be blank.' })
     password: string
     
-    @Length(1, 8, {
-		message: 'Your password must be between 1 and 8 characters.'
-	})
 	@IsString()
-	@IsNotEmpty({ message: 'Your password can not be blank.' })
-    username: string
+	@IsNotEmpty({ message: 'Your username can not be blank.' })
+	username: string
 }
 
-@Entity()
+export class LoginInput{
+	@IsString()
+	@IsNotEmpty({ message: 'Your username can not be blank.' })
+	username: string
+	
+	@IsString()
+	@IsNotEmpty({ message: 'Your password can not be blank.' })
+    password: string
+}
+
+@Entity('user')
 export class UserEntity {
 
     @ObjectIdColumn()
@@ -96,6 +103,9 @@ export class UserEntity {
 	@CreateDateColumn()
 	createdAt: Date
 
+	@Column()
+	role: string
+
     @BeforeInsert()
     async beforeRegister(){
         this._id = await uuid.v1()
@@ -105,7 +115,11 @@ export class UserEntity {
         this.reason = ""
     }
 
-    async matchPassword(password){
+    async matchPassword(password: string){
         return await bcrypt.compare(password, this.password)
-    }
+	}
+	
+	async newPassword(password: string){
+		return await bcrypt.hash(password, 10)
+	}
 }

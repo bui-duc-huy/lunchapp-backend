@@ -7,11 +7,13 @@ export class TypeormService implements TypeOrmOptionsFactory {
     async createTypeOrmOptions(): Promise<TypeOrmModuleOptions> {
         return {
             type: 'mongodb',
-            url: '',
+            database:'lunchapp',
+            url: 'mongodb+srv://duchuy:123@cluster0-lu1bw.mongodb.net/test?retryWrites=true&w=majority',
             entities: getMetadataArgsStorage().tables.map(tbl => tbl.target),
             synchronize: true,
             useNewUrlParser: true,
-            logging: true
+            logging: true,
+            useUnifiedTopology: true
         }
     }
 }
