@@ -32,6 +32,7 @@ export interface IMutation {
     login(input?: LoginInput): LoginResponse | Promise<LoginResponse>;
     deleteAllUser(): boolean | Promise<boolean>;
     changePassword(newPassword?: string, idUser?: string): User | Promise<User>;
+    lockAndUnlockUser(idUser?: string, reason?: string): boolean | Promise<boolean>;
 }
 
 export interface IQuery {

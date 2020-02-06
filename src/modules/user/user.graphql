@@ -45,4 +45,5 @@ type Mutation {
     login(input: LoginInput): LoginResponse 
     deleteAllUser: Boolean @hasPermission(roles: ["ADMIN"])
     changePassword(newPassword: String, idUser: String): User @hasPermission(roles: ["ADMIN"])
+    lockAndUnlockUser(idUser: String, reason: String): Boolean @hasPermission(roles: ["ADMIN"])
 }

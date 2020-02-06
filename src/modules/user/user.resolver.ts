@@ -85,4 +85,22 @@ export class UserResolver {
             token: token
         }
     }
+
+    @Mutation()
+    async lockAndUnlockUser(@Args('idUser') idUser: string, @Args('reason') reason: string): Promise<Boolean>{
+        const foundUser = await this.userRepository.findOne({_id: idUser})
+
+        foundUser.isLocked = !foundUser.isLocked
+        
+        if (foundUser.isLocked) {
+            foundUser.reason = reason
+        }else{
+            foundUser.reason = ''
+        }
+        
+
+        const savedUser = await this.userRepository.save(foundUser)
+
+        return savedUser !== null
+    }
 }
