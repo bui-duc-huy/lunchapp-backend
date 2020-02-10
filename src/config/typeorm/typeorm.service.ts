@@ -8,7 +8,7 @@ export class TypeormService implements TypeOrmOptionsFactory {
         return {
             type: 'mongodb',
             database:'lunchapp',
-            url: 'mongodb+srv://duchuy:123@cluster0-lu1bw.mongodb.net/test?retryWrites=true&w=majority',
+            url: 'mongodb+srv://duchuy:123@cluster0-i92zv.mongodb.net/test?retryWrites=true&w=majority',
             entities: getMetadataArgsStorage().tables.map(tbl => tbl.target),
             synchronize: true,
             useNewUrlParser: true,
